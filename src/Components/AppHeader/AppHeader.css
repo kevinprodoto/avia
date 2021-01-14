@@ -1,0 +1,38 @@
+.appHeader {
+    background-color: #E5E5E5;
+    margin: auto;
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+}
+
+.appHeader img {
+    width: 100px;
+    height: 100px;
+    margin-left: 100px;
+    border-radius: 50%;
+}
+
+.buttons {
+    margin: auto;
+}
+
+.buttons button {
+    width: 250px;
+    border: 0;
+    background-color: #FFF;
+    height: 50px;
+    outline: none;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #4A4A4A;
+    border: 1px solid #DFE5EC;
+}
+button:first-child {
+    background-color: #2196F3;
+    border: 1px solid #2196F3;
+    color: #FFF;
+}
