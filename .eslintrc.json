@@ -12,7 +12,6 @@
       "jest": true
     },
     "rules": {
-      "arrow-body-style": ["error", "always"],
       "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
       "curly": ["error"],
       "max-depth": ["warn", 4],

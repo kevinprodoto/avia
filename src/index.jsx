@@ -1,10 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import AppContainer from "./Containers/AppContainer"
+import React from 'react'
+import ReactDOM from 'react-dom'
+import AppContainer from './Containers/AppContainer'
 
-ReactDOM.render(
-  <AppContainer />,
-  document.getElementById('root')
-);
-
-
+ReactDOM.render(<AppContainer />, document.getElementById('root'))

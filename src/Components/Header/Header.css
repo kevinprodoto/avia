@@ -1,4 +1,4 @@
-.appHeader {
+.Header {
     background-color: #E5E5E5;
     margin: auto;
     width: 550px;
@@ -6,18 +6,28 @@
     flex-direction: column;
 }
 
-.appHeader img {
+.Header img {
     width: 100px;
     height: 100px;
-    margin-left: 100px;
     border-radius: 50%;
+    border: 0;
 }
 
-.buttons {
+.header__logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-left: 200px;
+    outline: none;
+    border: 0;
+    margin-bottom: 30px;
+    background-color: #E5E5E5;
+}
+.header__buttons {
     margin: auto;
 }
 
-.buttons button {
+.header__buttons button {
     width: 250px;
     border: 0;
     background-color: #FFF;
@@ -31,8 +41,8 @@
     color: #4A4A4A;
     border: 1px solid #DFE5EC;
 }
-button:first-child {
-    background-color: #2196F3;
-    border: 1px solid #2196F3;
-    color: #FFF;
+.active {
+    background-color: #2196F3 !important;
+    border: 1px solid #2196F3 !important;
+    color: #FFF !important;
 }

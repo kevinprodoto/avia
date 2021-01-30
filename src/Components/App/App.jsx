@@ -1,66 +1,59 @@
-import React from "react";
+import React from 'react'
 
-import PropTypes from "prop-types";
+import { createStore } from 'redux'
 
-import TicketList from "../../Containers/TicketList";
+import { Provider } from 'react-redux'
 
-import AppHeader from "../AppHeader";
+import PropTypes from 'prop-types'
 
-import "./App.css";
+import reducer from '../../Tools/reducer'
 
-const App = ({tickets, loading}) => {
+import TicketList from '../../Containers/TicketList'
 
+import Header from '../Header'
+
+import Filters from '../Filters'
+
+import theMost from '../../Tools/theMost'
+
+import './App.css'
+
+const App = ({ tickets, loading }) => {
+    const store = createStore(reducer)
+    store.dispatch({
+        type: 'getTickets',
+        tickets,
+        theMostFast: theMost(tickets, 'time'),
+        theMostCheap: theMost(tickets, 'cheap'),
+    })
     const checkLoad = () => {
         if (loading) {
-            return <p className = "load">Loading...</p>
+            return <p className="load">Loading...</p>
         }
-        return <TicketList tickets = {tickets} loading = {loading}/>
+        return <TicketList />
     }
 
-    return <section className = "Avia">
-        <div className ="filters">
-            <form>
-                <p>Количество пересадок</p>
-                <label className = "check">
-                    <input type = "checkbox" value = "all"/>
-                    <span className = "check__box"></span>
-                    <p className = "check__text">Все</p>
-                </label>
-                <label className = "check">
-                    <input type = "checkbox" value = "0" />
-                    <span className = "check__box"></span>
-                    <p className = "check__text">Без пересадок</p>
-                </label>
-                <label className = "check">
-                    <input type = "checkbox" value = "1" />
-                    <span className = "check__box"></span>
-                    <p className = "check__text">1 Пересадка</p>
-                </label>
-                <label className = "check">
-                    <input type = "checkbox" value = "2" />
-                    <span className = "check__box"></span>
-                    <p className = "check__text">2 Пересадки</p>
-                </label>
-                <label className = "check">
-                    <input type = "checkbox" value = "3"/>
-                    <span className = "check__box"></span>
-                    <p className = "check__text">3 Пересадки</p>
-                </label>
-            </form>
-        </div>
-        <div>
-            <AppHeader />
-            {checkLoad()}
-        </div>
-    </section> 
+    const update = () => (
+        <Provider store={store}>
+            <section className="Avia">
+                <Filters />
+                <div>
+                    <Header />
+                    {checkLoad()}
+                </div>
+            </section>
+        </Provider>
+    )
+    store.subscribe(update)
+    return update()
 }
 App.defaultProps = {
     tickets: [],
     loading: true,
 }
-  
-  App.propTypes = {
+
+App.propTypes = {
     tickets: PropTypes.instanceOf(Array),
     loading: PropTypes.bool,
 }
-export default App;
+export default App
