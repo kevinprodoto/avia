@@ -1,6 +1,6 @@
-const getClass = (value) => {
+const getClass = (value, str) => {
     let result = ''
-    if (value) result = 'active'
+    if (value) result = str
     return result
 }
 export default getClass

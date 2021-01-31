@@ -16,10 +16,10 @@ const Header = ({ theMostCheapBool, theMostFastBool, fromCheapToFast, fromFastTo
             <img src={logo} alt="icon" />
         </button>
         <div className="header__buttons">
-            <button className={getClass(theMostFastBool)} onClick={fromCheapToFast} type="button">
+            <button className={getClass(theMostFastBool, 'active')} onClick={fromCheapToFast} type="button">
                 Самый Быстрый
             </button>
-            <button className={getClass(theMostCheapBool)} onClick={fromFastToCheap} type="button">
+            <button className={getClass(theMostCheapBool, 'active')} onClick={fromFastToCheap} type="button">
                 Самый Дешёвый
             </button>
         </div>
@@ -31,7 +31,6 @@ Header.defaultProps = {
     theMostCheapBool: false,
     fromCheapToFast: () => {},
     fromFastToCheap: () => {},
-    // allClear: () => {},
 }
 
 Header.propTypes = {
@@ -39,7 +38,6 @@ Header.propTypes = {
     theMostCheapBool: PropTypes.bool,
     fromFastToCheap: PropTypes.func,
     fromCheapToFast: PropTypes.func,
-    //  allClear: PropTypes.func,
 }
 
 const mapStateToProps = (state) => ({
@@ -50,7 +48,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     fromCheapToFast: () => dispatch({ type: 'fromCheapToFast' }),
     fromFastToCheap: () => dispatch({ type: 'fromFastToCheap' }),
-    allClear: () => dispatch({ type: 'allClear' }),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

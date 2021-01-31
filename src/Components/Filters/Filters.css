@@ -25,6 +25,6 @@
     margin-top: 6px;
 }
 
-.check input:checked + .check__box{
+.checked{
     background-image: url(../../Images/Checkbox.svg);
 }

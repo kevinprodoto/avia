@@ -14,8 +14,6 @@ import Header from '../Header'
 
 import Filters from '../Filters'
 
-import theMost from '../../Tools/theMost'
-
 import './App.css'
 
 const App = ({ tickets, loading }) => {
@@ -23,12 +21,10 @@ const App = ({ tickets, loading }) => {
     store.dispatch({
         type: 'getTickets',
         tickets,
-        theMostFast: theMost(tickets, 'time'),
-        theMostCheap: theMost(tickets, 'cheap'),
     })
     const checkLoad = () => {
         if (loading) {
-            return <p className="load">Loading...</p>
+            ;<p>Loading...</p>
         }
         return <TicketList />
     }

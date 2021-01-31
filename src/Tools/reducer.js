@@ -1,43 +1,46 @@
+import checkAllTicket from './checkAllTicket'
+
 const reducer = (
     state = {
         loading: true,
         tickets: [],
         theMostCheapBool: false,
-        theMostFastBool: false,
+        theMostFastBool: true,
         allTickets: true,
-        withoutSeg: false,
-        oneSeg: false,
-        twoSeg: false,
-        threeSeg: false,
+        withoutSeg: true,
+        oneSeg: true,
+        twoSeg: true,
+        threeSeg: true,
     },
     action
 ) => {
     switch (action.type) {
-        case 'getTickets': // Разбить чекбоксы и фильтры на кейсы с тоглом(если есть убрать, если нет установить). Установить стор на все компоненты с состоянием.
-            return {
-                loading: false,
-                tickets: action.tickets,
-                theMostCheap: action.theMostCheap,
-                theMostFast: action.theMostFast,
-                theMostCheapBool: true,
-                theMostFastBool: false,
-            }
+        case 'getTickets':
+            return { ...state, loading: false, tickets: action.tickets }
         case 'fromCheapToFast':
             return { ...state, ...{ theMostCheapBool: false, theMostFastBool: true } }
         case 'fromFastToCheap':
             return { ...state, ...{ theMostCheapBool: true, theMostFastBool: false } }
-        case 'allClear':
-            return {
-                ...state,
-                loading: true,
-                theMostCheapBool: false,
-                theMostFastBool: false,
-                allTickets: true,
-                withoutSeg: false,
-                oneSeg: false,
-                twoSeg: false,
-                threeSeg: false,
-            }
+        case 'allCheckboxes':
+            return state.allTickets
+                ? {
+                      ...state,
+                      allTickets: false,
+                      withoutSeg: false,
+                      oneSeg: false,
+                      twoSeg: false,
+                      threeSeg: false,
+                  }
+                : {
+                      ...state,
+                      allTickets: true,
+                      withoutSeg: true,
+                      oneSeg: true,
+                      twoSeg: true,
+                      threeSeg: true,
+                  }
+        case 'seg':
+            return checkAllTicket(state, action.value)
         default:
             return state
     }
