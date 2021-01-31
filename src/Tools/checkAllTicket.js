@@ -5,8 +5,7 @@ const checkAllTicket = (state, item) => {
     } else {
         result = { ...state, [item]: true }
     }
-    if (result.withoutSeg && result.oneSeg && result.twoSeg && result.threeSeg && !result.allTickets)
-        return { ...result, allTickets: !state.allTickets }
+    if (result.withoutSeg && result.oneSeg && result.twoSeg && result.threeSeg && !result.allTickets) return { ...result, allTickets: !state.allTickets }
     return result
 }
 
