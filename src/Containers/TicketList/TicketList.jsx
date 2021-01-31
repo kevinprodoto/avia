@@ -27,8 +27,8 @@ const TicketList = ({ tickets, theMostCheapBool, theMostFastBool, loader }) => {
         <ul className="ticketList">
             {tickets
                 .filter((item, index, arr) => filterTicket(item, arr, theMostCheapBool, theMostFastBool))
-                .map((ticket, index) => (
-                    <Ticket logo={ticket.carrier} price={ticket.price} key={index} segments={ticket.segments} />
+                .map((ticket) => (
+                    <Ticket logo={ticket.carrier} price={ticket.price} key={ticket.price} segments={ticket.segments} />
                 ))}
         </ul>
     )

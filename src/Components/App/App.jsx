@@ -1,6 +1,8 @@
 import React from 'react'
 
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
+
+import reduxThunk from "redux-thunk"
 
 import { Provider } from 'react-redux'
 
@@ -16,8 +18,24 @@ import Filters from '../Filters'
 
 import './App.css'
 
+const composeEnhancers =
+typeof window === 'object' &&
+window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+    // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+  }) : compose;
+
 const App = ({ tickets, loading }) => {
-    const store = createStore(reducer)
+
+
+
+    const loggerMiddleware = store => next => action => {
+        const result = next(action)
+        console.log("MiddleWare", store.getState())
+        return result
+    } 
+
+    const store = createStore(reducer, composeEnhancers(applyMiddleware(loggerMiddleware, reduxThunk)))
     store.dispatch({
         type: 'getTickets',
         tickets,
