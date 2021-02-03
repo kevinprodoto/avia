@@ -30,6 +30,7 @@ const composeEnhancers =
 const App = ({ tickets, error }) => {
     const loggerMiddleware = (store) => (next) => (action) => {
         const result = next(action)
+        console.log("MiddleWare", store.getState())
         return result
     }
 
