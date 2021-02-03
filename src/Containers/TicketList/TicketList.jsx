@@ -20,7 +20,7 @@ import './TicketList.css'
 import 'antd/dist/antd.css';
 
 const TicketList = ({error, tickets, theMostCheapBool, theMostFastBool, loader, loaderFalse }) => {
-    if (error) return <p>OOops!!! We have some problems, srry!!!</p>
+    if (error) return <p className = "err">OOops!!! We have some problems, srry!!!</p>
     if (!loader && tickets.length === 0) {
         return (
             <div className="ticketList">
