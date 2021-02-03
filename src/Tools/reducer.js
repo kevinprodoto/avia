@@ -18,9 +18,9 @@ const reducer = (
         case 'getTickets':
             return { ...state, tickets: action.tickets }
         case 'fromCheapToFast':
-            return { ...state, ...{ theMostCheapBool: false, theMostFastBool: true, loading: true, } }
+            return { ...state, ...{ theMostCheapBool: false, theMostFastBool: true, loading: true } }
         case 'fromFastToCheap':
-            return { ...state, ...{ theMostCheapBool: true, theMostFastBool: false, loading: true, } }
+            return { ...state, ...{ theMostCheapBool: true, theMostFastBool: false, loading: true } }
         case 'allCheckboxes':
             return state.allTickets
                 ? {
@@ -43,8 +43,8 @@ const reducer = (
                   }
         case 'seg':
             return checkAllTicket(state, action.value)
-        case "loaderFalse": 
-            return {...state, loading: false}
+        case 'loaderFalse':
+            return { ...state, loading: false }
         default:
             return state
     }

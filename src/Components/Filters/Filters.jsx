@@ -6,12 +6,20 @@ import { PropTypes } from 'prop-types'
 
 import getClass from '../../Tools/getClass'
 
-import showFilters from "../../Tools/showFilters"
+import showFilters from '../../Tools/showFilters'
 
 import './Filters.css'
 
 const Filters = ({ state, allCheckbox, seg }) => (
-    <div onKeyPress = {() => {}} tabIndex = {0} role = "button" className="filters" onClick = {() => {if (document.body.clientWidth < 768) showFilters() }}>
+    <div
+        onKeyPress={() => {}}
+        tabIndex={0}
+        role="button"
+        className="filters"
+        onClick={() => {
+            if (document.body.clientWidth < 768) showFilters()
+        }}
+    >
         <form>
             <p>Количество пересадок</p>
             <label className="check">

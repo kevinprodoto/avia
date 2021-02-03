@@ -16,12 +16,11 @@ export default class AppContainer extends Component {
             this.setState(() => ({
                 tickets: tickets.tickets,
             }))
-        } catch(err) {
+        } catch (err) {
             this.setState(() => ({
                 error: true,
             }))
         }
-
     }
 
     localId = async () => {

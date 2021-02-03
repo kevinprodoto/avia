@@ -5,9 +5,9 @@ import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
 
-import {uniqueId} from "lodash"
+import { uniqueId } from 'lodash'
 
-import {Spin} from "antd"
+import { Spin } from 'antd'
 
 import Ticket from '../../Components/Ticket'
 
@@ -17,10 +17,10 @@ import filterTicket from '../../Tools/filterTicket'
 
 import './TicketList.css'
 
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.css'
 
-const TicketList = ({error, tickets, theMostCheapBool, theMostFastBool, loader, loaderFalse }) => {
-    if (error) return <p className = "err">OOops!!! We have some problems, srry!!!</p>
+const TicketList = ({ error, tickets, theMostCheapBool, theMostFastBool, loader, loaderFalse }) => {
+    if (error) return <p className="err">OOops!!! We have some problems, srry!!!</p>
     if (!loader && tickets.length === 0) {
         return (
             <div className="ticketList">
@@ -29,7 +29,7 @@ const TicketList = ({error, tickets, theMostCheapBool, theMostFastBool, loader, 
         )
     }
     if (loader && tickets.length !== 0) {
-        loaderFalse();
+        loaderFalse()
     }
 
     if (!loader && tickets.length !== 0) {
@@ -38,14 +38,21 @@ const TicketList = ({error, tickets, theMostCheapBool, theMostFastBool, loader, 
                 {tickets
                     .filter((item, index, arr) => filterTicket(item, arr, theMostCheapBool, theMostFastBool))
                     .map((ticket) => (
-                        <Ticket logo={ticket.carrier} price={ticket.price} key={uniqueId()} segments={ticket.segments} />
+                        <Ticket
+                            logo={ticket.carrier}
+                            price={ticket.price}
+                            key={uniqueId()}
+                            segments={ticket.segments}
+                        />
                     ))}
             </ul>
         )
     }
-    return <div className = "loader"><Spin size = "large" wrapperClassName = "loader"/></div>
-
-
+    return (
+        <div className="loader">
+            <Spin size="large" wrapperClassName="loader" />
+        </div>
+    )
 }
 
 TicketList.defaultProps = {
