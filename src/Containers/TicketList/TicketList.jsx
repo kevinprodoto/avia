@@ -20,7 +20,18 @@ import './TicketList.css'
 import 'antd/dist/antd.css'
 
 const TicketList = ({ error, tickets, theMostCheapBool, theMostFastBool, loader, loaderFalse }) => {
-    if (error) return <p className="err">OOops!!! We have some problems, srry!!!</p>
+
+    if (loader && tickets.length === 0) {
+        setTimeout(() => {
+            loaderFalse()
+        }, 1000);
+        return (
+            <div className="loader">
+                <Spin size="large" wrapperClassName="loader" />
+            </div>
+        )
+    }
+
     if (!loader && tickets.length === 0) {
         return (
             <div className="ticketList">
@@ -28,30 +39,22 @@ const TicketList = ({ error, tickets, theMostCheapBool, theMostFastBool, loader,
             </div>
         )
     }
-    if (loader && tickets.length !== 0) {
-        loaderFalse()
-    }
 
-    if (!loader && tickets.length !== 0) {
-        return (
-            <ul className="ticketList">
-                {tickets
-                    .filter((item, index, arr) => filterTicket(item, arr, theMostCheapBool, theMostFastBool))
-                    .map((ticket) => (
-                        <Ticket
-                            logo={ticket.carrier}
-                            price={ticket.price}
-                            key={uniqueId()}
-                            segments={ticket.segments}
-                        />
-                    ))}
-            </ul>
-        )
-    }
+    if (error) return <p className="err">OOops!!! We have some problems, srry!!!</p>
+  
     return (
-        <div className="loader">
-            <Spin size="large" wrapperClassName="loader" />
-        </div>
+        <ul className="ticketList">
+            {tickets
+                .filter((item, index, arr) => filterTicket(item, arr, theMostCheapBool, theMostFastBool))
+                .map((ticket) => (
+                    <Ticket
+                        logo={ticket.carrier}
+                        price={ticket.price}
+                        key={uniqueId()}
+                        segments={ticket.segments}
+                    />
+                ))}
+        </ul>
     )
 }
 
