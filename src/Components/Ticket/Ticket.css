@@ -55,3 +55,47 @@ img {
     font-size: 24px;
     line-height: 24px;
 }
+
+
+
+@media (max-width: 768px) {
+    .ticket {
+        width: 450px;
+        height: 250px;
+        margin-left: 40px;
+    }
+
+    .ticket__block {
+        margin: 10px 10px 0 10px;
+        flex-wrap: wrap;
+    }
+
+    .ticket__block:first-child {
+        flex-wrap: nowrap;
+    }
+
+    img {
+        margin-right: 20px;
+        width: 110px;
+        height: 36px;
+    }
+    .ticket__block p {
+        padding-top: 3px;
+    }
+    .ticket__segment p {
+        margin-right: 5px;
+        width: 60px;
+    }
+
+    .ticket__segment p:last-child {
+        width: 100px;
+    }
+}
+
+@media (max-width: 500px) {
+    .ticket {
+        width: 280px;
+        height: 250px;
+        margin-left: 40px;
+    }
+}

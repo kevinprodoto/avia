@@ -46,3 +46,23 @@
     border: 1px solid #2196F3 !important;
     color: #FFF !important;
 }
+
+@media (max-width: 768px) {
+    .Header {
+        width: 100%;
+    }
+
+    .header__buttons {
+        width: 100%;
+        margin: auto;
+    }
+
+    .header__buttons button {
+        width: 50%;
+        font-size: 9px;
+    }
+    .header__logo {
+        margin: auto;
+        margin-bottom: 30px;
+    } 
+}

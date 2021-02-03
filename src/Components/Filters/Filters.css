@@ -1,4 +1,32 @@
+.filters {
+    width: 230px;
+    height: 250px;
+    margin-top: 100px;
+    background-color: #FFF;
+    margin-left: 100px;
+    padding: 20px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #4A4A4A;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    outline: none;
+}
+
+.filters form {
+    display: flex;
+    flex-direction: column;
+}
+
+.filters form p {
+    margin-bottom : 20px;
+}
+
 .check {
+    width: 140px;
     margin-bottom: 20px;
     padding-left: 30px;
     vertical-align: middle;
@@ -27,4 +55,25 @@
 
 .checked{
     background-image: url(../../Images/Checkbox.svg);
+}
+
+.show {
+    margin-left: 0 !important;
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    .filters {
+        position: fixed;
+        margin-left: -200px;
+        margin-top: 170px;
+        display: flex;
+        padding-right: 0;
+    }
+    .filters::after {
+        content: "filters";
+        writing-mode: vertical-rl;
+        margin-left: 10px;
+        letter-spacing: 2px;
+    }
 }

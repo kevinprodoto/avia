@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 import React from 'react'
 
@@ -26,13 +27,12 @@ window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
     // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
   }) : compose;
 
-const App = ({ tickets, loading }) => {
+const App = ({ tickets, error }) => {
 
 
 
     const loggerMiddleware = store => next => action => {
         const result = next(action)
-        console.log("MiddleWare", store.getState())
         return result
     } 
 
@@ -41,12 +41,6 @@ const App = ({ tickets, loading }) => {
         type: 'getTickets',
         tickets,
     })
-    const checkLoad = () => {
-        if (loading) {
-            ;<p>Loading...</p>
-        }
-        return <TicketList />
-    }
 
     const update = () => (
         <Provider store={store}>
@@ -54,7 +48,7 @@ const App = ({ tickets, loading }) => {
                 <Filters />
                 <div>
                     <Header />
-                    {checkLoad()}
+                    <TicketList error = {error} />
                 </div>
             </section>
         </Provider>
@@ -64,11 +58,9 @@ const App = ({ tickets, loading }) => {
 }
 App.defaultProps = {
     tickets: [],
-    loading: true,
 }
 
 App.propTypes = {
     tickets: PropTypes.instanceOf(Array),
-    loading: PropTypes.bool,
 }
 export default App

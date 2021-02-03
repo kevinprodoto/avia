@@ -5,6 +5,10 @@ import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
 
+import {uniqueId} from "lodash"
+
+import {Spin} from "antd"
+
 import Ticket from '../../Components/Ticket'
 
 import checkboxFilter from '../../Tools/checkboxFilter'
@@ -13,25 +17,35 @@ import filterTicket from '../../Tools/filterTicket'
 
 import './TicketList.css'
 
-const TicketList = ({ tickets, theMostCheapBool, theMostFastBool, loader }) => {
-    if (loader) return <p>Loading...</p>
-    if (tickets.length === 0) {
+import 'antd/dist/antd.css';
+
+const TicketList = ({error, tickets, theMostCheapBool, theMostFastBool, loader, loaderFalse }) => {
+    if (error) return <p>OOops!!! We have some problems, srry!!!</p>
+    if (!loader && tickets.length === 0) {
         return (
             <div className="ticketList">
-                <p className="noTickets">Рейсов, подходящих под заданные фильтры, не найдено</p>
+                <p className="noTickets">Рейсов нет, но вы держитесь!!!</p>
             </div>
         )
     }
+    if (loader && tickets.length !== 0) {
+        loaderFalse();
+    }
 
-    return (
-        <ul className="ticketList">
-            {tickets
-                .filter((item, index, arr) => filterTicket(item, arr, theMostCheapBool, theMostFastBool))
-                .map((ticket) => (
-                    <Ticket logo={ticket.carrier} price={ticket.price} key={ticket.price} segments={ticket.segments} />
-                ))}
-        </ul>
-    )
+    if (!loader && tickets.length !== 0) {
+        return (
+            <ul className="ticketList">
+                {tickets
+                    .filter((item, index, arr) => filterTicket(item, arr, theMostCheapBool, theMostFastBool))
+                    .map((ticket) => (
+                        <Ticket logo={ticket.carrier} price={ticket.price} key={uniqueId()} segments={ticket.segments} />
+                    ))}
+            </ul>
+        )
+    }
+    return <div className = "loader"><Spin size = "large" wrapperClassName = "loader"/></div>
+
+
 }
 
 TicketList.defaultProps = {
@@ -39,6 +53,8 @@ TicketList.defaultProps = {
     theMostFastBool: true,
     theMostCheapBool: false,
     loader: true,
+    loaderFalse: () => {},
+    error: false,
 }
 
 TicketList.propTypes = {
@@ -46,6 +62,8 @@ TicketList.propTypes = {
     theMostFastBool: PropTypes.bool,
     theMostCheapBool: PropTypes.bool,
     loader: PropTypes.bool,
+    loaderFalse: PropTypes.func,
+    error: PropTypes.bool,
 }
 
 const mapStateToProps = (state) => ({
@@ -56,5 +74,8 @@ const mapStateToProps = (state) => ({
     theMostFastBool: state.theMostFastBool,
     loader: state.loading,
 })
+const mapDispatchToProps = (dispatch) => ({
+    loaderFalse: () => dispatch({ type: 'loaderFalse' }),
+})
 
-export default connect(mapStateToProps)(TicketList)
+export default connect(mapStateToProps, mapDispatchToProps)(TicketList)
