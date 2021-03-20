@@ -2,6 +2,8 @@ import React from 'react'
 
 import PropTypes from 'prop-types'
 
+import { uniqueId } from 'lodash'
+
 import './Ticket.css'
 
 const Ticket = ({ price, logo, segments }) => (
@@ -16,7 +18,7 @@ const Ticket = ({ price, logo, segments }) => (
             if (countSegm > 1 && countSegm < 5) stopsWord = 'пересадки'
             if (countSegm >= 5 || countSegm === 0) stopsWord = 'пересадок'
             return (
-                <div className="ticket__block">
+                <div key = {uniqueId()} className="ticket__block">
                     <div className="ticket__segment">
                         <p className="grey">{`${item.origin} - ${item.destination}`}</p>
                         <p className="grey">в пути</p>
